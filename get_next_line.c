@@ -3,39 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lukarape <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: araramya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 18:18:05 by lukarape          #+#    #+#             */
-/*   Updated: 2021/02/08 19:35:09 by lukarape         ###   ########.fr       */
+/*   Created: 2021/02/14 14:29:47 by araramya          #+#    #+#             */
+/*   Updated: 2021/02/22 16:23:19 by araramya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
-	char		*buf;
-	static char	*memory;
-	int			get;
+	char			*buffer;
+	int				readed;
+	static char		*rem_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || line == NULL)
 		return (-1);
-	if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	if (!(buffer = malloc((sizeof(char) * BUFFER_SIZE) + 1)))
 		return (-1);
-	get = 1;
-	while ((get = read(fd, buf, BUFFER_SIZE)) > 0)
+	while ((readed = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		buf[get] = '\0';
-		memory = ft_strjoin(memory, buf);
-		if (ft_strendl(memory))
+		buffer[readed] = '\0';
+		rem_line = ft_strjoin(rem_line, buffer);
+		if (ft_str_endline(rem_line))
 			break ;
 	}
-	free(buf);
-	if (get < 0)
+	free(buffer);
+	if (readed < 0)
 		return (-1);
-	*line = ft_getline(memory);
-	memory = ft_clearmemory(memory);
-	if (get == 0 && !memory)
+	*line = ft_remline(rem_line);
+	rem_line = ft_clearrem(rem_line);
+	if (readed == 0 && !rem_line)
 		return (0);
 	return (1);
 }
+
+
+
+

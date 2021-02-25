@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lukarape <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: araramya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/04 13:03:52 by lukarape          #+#    #+#             */
-/*   Updated: 2021/02/08 18:23:19 by lukarape         ###   ########.fr       */
+/*   Created: 2021/02/14 14:55:19 by araramya          #+#    #+#             */
+/*   Updated: 2021/02/22 19:55:22 by araramya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include <limits.h>
+#include <stdio.h>
 
 int			get_next_line(int fd, char **line);
 int			ft_strlen(char *str);
-char		*ft_clearmemory(char *str);
-char		*ft_getline(char *str);
-char		*ft_strjoin(char *s1, char *s2);
-int			ft_strendl(char *str);
+char		*ft_strjoin(char *rem_line, char *buffer);
+char		*ft_strnew(size_t size);
+int			ft_str_endline(char *str);
+char		*ft_remline(char *rem_line);
+char		*ft_clearrem(char *rem_line);
 
 #endif
